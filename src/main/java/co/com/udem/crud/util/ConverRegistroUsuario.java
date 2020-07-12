@@ -27,5 +27,10 @@ public class ConverRegistroUsuario {
 
 	}
 	
+	
+	public Iterable<RegistroUsuario> listConvertToEntity(Iterable<RegistroUsuarioDto> listRegistroUsuarioDto) throws ParseException{				 	
+		return Arrays.asList(modelMapper.map(listRegistroUsuarioDto, RegistroUsuario[].class));
+
+	}
 
 }
