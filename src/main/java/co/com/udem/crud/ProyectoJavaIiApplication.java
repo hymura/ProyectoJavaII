@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import co.com.udem.crud.dto.TipoIdentificacionDto;
 import co.com.udem.crud.util.ConverRegistroUsuario;
 import co.com.udem.crud.util.ConvertTipoIdentificacion;
 
@@ -31,13 +32,13 @@ public class ProyectoJavaIiApplication {
 		
 	}
 	
-/*	
+	
 	@Bean
 	public TipoIdentificacionDto tipoIdentificacionDto() {
 		return new TipoIdentificacionDto();
 	}
 	
-*/
+
 
 	
 	

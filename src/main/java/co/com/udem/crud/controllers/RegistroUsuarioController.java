@@ -1,7 +1,8 @@
 package co.com.udem.crud.controllers;
 
-import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.udem.crud.dto.RegistroUsuarioDto;
+import co.com.udem.crud.dto.TipoIdentificacionDto;
 import co.com.udem.crud.entities.RegistroUsuario;
 import co.com.udem.crud.repositories.RegistroUsuarioRepository;
 import co.com.udem.crud.util.Constantes;
 import co.com.udem.crud.util.ConverRegistroUsuario;
+import co.com.udem.crud.util.ConvertTipoIdentificacion;
 
 @RestController
 public class RegistroUsuarioController {
@@ -28,6 +31,9 @@ public class RegistroUsuarioController {
 	
 	@Autowired
 	private ConverRegistroUsuario converRegistroUsuario;
+	
+	@Autowired
+	private ConvertTipoIdentificacion convertTipoIdentificacion;
 	
 	
 	@PostMapping("/registroUsuario/adicionar")
@@ -42,7 +48,7 @@ public class RegistroUsuarioController {
 			response.put(Constantes.CODIGO_HTTP, "200");
             response.put(Constantes.MENSAJE_EXITO, "Registrado insertado exitosamente");
             return response;
-        } catch (ParseException e) {
+        } catch (Exception e) {
             response.put(Constantes.CODIGO_HTTP, "500");
             response.put(Constantes.MENSAJE_ERROR, "Ocurrió un problema al insertar");
             return response;
@@ -51,7 +57,7 @@ public class RegistroUsuarioController {
 
 	
 	@PutMapping("/registroUsuario/{id}")	
-	public   ResponseEntity<Object> updateCliente(@RequestBody RegistroUsuarioDto newUser, @PathVariable Long id ) throws ParseException{
+	public   ResponseEntity<Object> updateCliente(@RequestBody RegistroUsuarioDto newUser, @PathVariable Long id ){
 		
 		 if(registroUsuarioRepository.findById(id).isPresent()) {
 		    RegistroUsuario  registroUsuario=converRegistroUsuario.convertToEntity(newUser);		    
@@ -65,9 +71,21 @@ public class RegistroUsuarioController {
 		
 	
 	@GetMapping("/registroUsuario")
-	public Iterable<RegistroUsuarioDto> listfindAll() throws ParseException{
+	public Iterable<RegistroUsuarioDto> listfindAll(){
+		
+		List<RegistroUsuarioDto> listUsuarioDto =new ArrayList<>();
+			
+		for (RegistroUsuario usuario: registroUsuarioRepository.findAll()) {
+			listUsuarioDto.add(new RegistroUsuarioDto(usuario.getId(),usuario.getNombres(), usuario.getApellidos(),usuario.getIdentificacion(),usuario.getDireccion(),usuario.getTelefono(),usuario.getEmail(),usuario.getPassword(),					
+					new TipoIdentificacionDto(usuario.getTipoIdentificacion().getIdTipoIdent(), usuario.getTipoIdentificacion().getTipo(), usuario.getTipoIdentificacion().getDescripcion())
+					
+					)
+					);
 				
-		return converRegistroUsuario.listConvertToDTO(registroUsuarioRepository.findAll());		
+		}
+  
+		return listUsuarioDto;	
+
 	}
 	
 	

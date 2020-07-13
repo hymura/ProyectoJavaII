@@ -1,6 +1,5 @@
 package co.com.udem.crud.util;
 
-import java.text.ParseException;
 import java.util.Arrays;
 
 import org.modelmapper.ModelMapper;
@@ -14,21 +13,19 @@ public class ConverRegistroUsuario {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-    public RegistroUsuario convertToEntity(RegistroUsuarioDto registroUsuarioDto) throws ParseException {
+    public RegistroUsuario convertToEntity(RegistroUsuarioDto registroUsuarioDto)  {
         return modelMapper.map(registroUsuarioDto, RegistroUsuario.class);
     }
     
-    public RegistroUsuarioDto convertToDTO(RegistroUsuario registroUsuario) throws ParseException {
+    public RegistroUsuarioDto convertToDTO(RegistroUsuario registroUsuario)  {
         return modelMapper.map(registroUsuario, RegistroUsuarioDto.class);
     }
 
-	public Iterable<RegistroUsuarioDto> listConvertToDTO(Iterable<RegistroUsuario> entity) throws ParseException{				 	
+	public Iterable<RegistroUsuarioDto> listConvertToDTO(Iterable<RegistroUsuario> entity) {				 			 
 		return Arrays.asList(modelMapper.map(entity, RegistroUsuarioDto[].class));
-
 	}
-	
-	
-	public Iterable<RegistroUsuario> listConvertToEntity(Iterable<RegistroUsuarioDto> listRegistroUsuarioDto) throws ParseException{				 	
+		
+	public Iterable<RegistroUsuario> listConvertToEntity(Iterable<RegistroUsuarioDto> listRegistroUsuarioDto) {				 	
 		return Arrays.asList(modelMapper.map(listRegistroUsuarioDto, RegistroUsuario[].class));
 
 	}

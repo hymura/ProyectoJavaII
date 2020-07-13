@@ -1,6 +1,5 @@
 package co.com.udem.crud.util;
 
-import java.text.ParseException;
 import java.util.Arrays;
 
 import org.modelmapper.ModelMapper;
@@ -14,15 +13,15 @@ public class ConvertTipoIdentificacion {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-    public TipoIdentificacion convertToEntity(TipoIdentificacionDto tipoIdentificacionDto) throws ParseException {
+    public TipoIdentificacion convertToEntity(TipoIdentificacionDto tipoIdentificacionDto)  {
         return modelMapper.map(tipoIdentificacionDto, TipoIdentificacion.class);
     }
     
-    public TipoIdentificacionDto convertToDTO(TipoIdentificacion tipoIdentificacion) throws ParseException {
+    public TipoIdentificacionDto convertToDTO(TipoIdentificacion tipoIdentificacion)  {
         return modelMapper.map(tipoIdentificacion, TipoIdentificacionDto.class);
     }
 
-	public Iterable<TipoIdentificacionDto> listConvertToDTO(Iterable<TipoIdentificacion> entity) throws ParseException{				 	
+	public Iterable<TipoIdentificacionDto> listConvertToDTO(Iterable<TipoIdentificacion> entity) {				 	
 		return Arrays.asList(modelMapper.map(entity, TipoIdentificacionDto[].class));
 
 	}

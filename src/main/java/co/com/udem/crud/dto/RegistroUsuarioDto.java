@@ -17,9 +17,12 @@ public class RegistroUsuarioDto {
 	private TipoIdentificacionDto tipoIdentificacionDto;	
 
 
+	
+	
+	
 	public RegistroUsuarioDto(Long id, String nombres, String apellidos, String identificacion, String direccion,
 			String telefono, String email, String password, TipoIdentificacionDto tipoIdentificacionDto) {
-		super();
+
 		this.id = id;
 		this.nombres = nombres;
 		this.apellidos = apellidos;
@@ -30,13 +33,28 @@ public class RegistroUsuarioDto {
 		this.password = password;
 		this.tipoIdentificacionDto = tipoIdentificacionDto;
 	}
+
+
+
+	public RegistroUsuarioDto(Long id, String nombres, String apellidos, String identificacion, String direccion,
+			String telefono, String email, String password, Long tipoIdentificacion) {
+		this.id = id;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.identificacion = identificacion;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.email = email;
+		this.password = password;
+		this.tipoIdentificacionDto.setIdTipoIdent(tipoIdentificacion);		
+		
+	}
 	
 	
 	
 	public RegistroUsuarioDto() {
 	
 	}
-
 
 
 	public Long getId() {
@@ -58,7 +76,6 @@ public class RegistroUsuarioDto {
 		this.apellidos = apellidos;
 	}
 	
-
 	public String getIdentificacion() {
 		return identificacion;
 	}
