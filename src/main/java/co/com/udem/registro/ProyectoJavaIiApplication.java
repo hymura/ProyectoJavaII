@@ -1,13 +1,13 @@
-package co.com.udem.crud;
+package co.com.udem.registro;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import co.com.udem.crud.dto.TipoIdentificacionDto;
-import co.com.udem.crud.util.ConverRegistroUsuario;
-import co.com.udem.crud.util.ConvertTipoIdentificacion;
+import co.com.udem.registro.dto.TipoIdentificacionDto;
+import co.com.udem.registro.util.ConverRegistroUsuario;
+import co.com.udem.registro.util.ConvertTipoIdentificacion;
 
 @SpringBootApplication
 public class ProyectoJavaIiApplication {
@@ -31,15 +31,12 @@ public class ProyectoJavaIiApplication {
 		return new ConverRegistroUsuario();
 		
 	}
-	
-	
+		
 	@Bean
 	public TipoIdentificacionDto tipoIdentificacionDto() {
 		return new TipoIdentificacionDto();
 	}
 	
-
-
-	
+		
 	
 }

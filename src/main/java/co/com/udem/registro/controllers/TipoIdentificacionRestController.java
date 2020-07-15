@@ -1,4 +1,4 @@
-package co.com.udem.crud.controllers;
+package co.com.udem.registro.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.udem.crud.dto.TipoIdentificacionDto;
-import co.com.udem.crud.entities.TipoIdentificacion;
-import co.com.udem.crud.repositories.TipoIdentificacionRepository;
-import co.com.udem.crud.util.ConvertTipoIdentificacion;
-import co.com.udem.crud.util.Constantes;
+import co.com.udem.registro.dto.TipoIdentificacionDto;
+import co.com.udem.registro.entities.TipoIdentificacion;
+import co.com.udem.registro.repositories.TipoIdentificacionRepository;
+import co.com.udem.registro.util.Constantes;
+import co.com.udem.registro.util.ConvertTipoIdentificacion;
 
 
 @RestController

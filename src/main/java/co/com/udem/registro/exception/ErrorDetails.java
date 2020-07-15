@@ -1,4 +1,4 @@
-package co.com.udem.crud.exception;
+package co.com.udem.registro.exception;
 
 import java.util.Date;
 

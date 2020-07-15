@@ -1,12 +1,12 @@
-package co.com.udem.crud.util;
+package co.com.udem.registro.util;
 
 import java.util.Arrays;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import co.com.udem.crud.dto.TipoIdentificacionDto;
-import co.com.udem.crud.entities.TipoIdentificacion;
+import co.com.udem.registro.dto.TipoIdentificacionDto;
+import co.com.udem.registro.entities.TipoIdentificacion;
 
 public class ConvertTipoIdentificacion {
 	

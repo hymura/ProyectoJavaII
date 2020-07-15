@@ -1,4 +1,4 @@
-package co.com.udem.crud.dto;
+package co.com.udem.registro.dto;
 
 public class TipoIdentificacionDto {
 	

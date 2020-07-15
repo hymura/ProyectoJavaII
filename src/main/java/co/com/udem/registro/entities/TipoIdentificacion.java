@@ -1,4 +1,4 @@
-package co.com.udem.crud.entities;
+package co.com.udem.registro.entities;
 
 import java.util.Set;
 

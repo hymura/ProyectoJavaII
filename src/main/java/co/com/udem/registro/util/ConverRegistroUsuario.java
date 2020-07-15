@@ -1,12 +1,12 @@
-package co.com.udem.crud.util;
+package co.com.udem.registro.util;
 
 import java.util.Arrays;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import co.com.udem.crud.dto.RegistroUsuarioDto;
-import co.com.udem.crud.entities.RegistroUsuario;
+import co.com.udem.registro.dto.RegistroUsuarioDto;
+import co.com.udem.registro.entities.RegistroUsuario;
 
 public class ConverRegistroUsuario {
 	

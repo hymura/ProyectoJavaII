@@ -1,4 +1,4 @@
-package co.com.udem.crud.controllers;
+package co.com.udem.registro.controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.com.udem.crud.dto.RegistroUsuarioDto;
-import co.com.udem.crud.dto.TipoIdentificacionDto;
-import co.com.udem.crud.entities.RegistroUsuario;
-import co.com.udem.crud.repositories.RegistroUsuarioRepository;
-import co.com.udem.crud.util.Constantes;
-import co.com.udem.crud.util.ConverRegistroUsuario;
-import co.com.udem.crud.util.ConvertTipoIdentificacion;
+import co.com.udem.registro.dto.RegistroUsuarioDto;
+import co.com.udem.registro.dto.TipoIdentificacionDto;
+import co.com.udem.registro.entities.RegistroUsuario;
+import co.com.udem.registro.repositories.RegistroUsuarioRepository;
+import co.com.udem.registro.util.Constantes;
+import co.com.udem.registro.util.ConverRegistroUsuario;
 
 @RestController
 public class RegistroUsuarioController {
@@ -31,10 +30,6 @@ public class RegistroUsuarioController {
 	
 	@Autowired
 	private ConverRegistroUsuario converRegistroUsuario;
-	
-	@Autowired
-	private ConvertTipoIdentificacion convertTipoIdentificacion;
-	
 	
 	@PostMapping("/registroUsuario/adicionar")
 	public Map<String, String> addRegistroUsuario(@RequestBody RegistroUsuarioDto registroUsuarioDto) {
