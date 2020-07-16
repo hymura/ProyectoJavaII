@@ -107,8 +107,8 @@ public class RegistroUsuarioDto {
 		return telefono;
 	}
 	public void setTelefono(String telefono) throws ManejoExcepcion {
-		 if (telefono.length() <= 8) {
-	            throw new ManejoExcepcion("El numero telefónico  debe ser mayor a 8 digitos ");
+		 if (telefono.length() < 7) {
+	            throw new ManejoExcepcion("El numero telefónico  debe ser mayor a 6 digitos ");
 	        }
 	        this.telefono = telefono;
 	}
