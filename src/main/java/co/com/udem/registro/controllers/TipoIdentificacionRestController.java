@@ -22,21 +22,14 @@ import co.com.udem.registro.util.ConvertTipoIdentificacion;
 
 @RestController
 public class TipoIdentificacionRestController {
-	
+
 		
 	@Autowired
 	private TipoIdentificacionRepository tipoIdentificacionRepository;
 	
 	@Autowired
 	private ConvertTipoIdentificacion convertTipoIdentificacion;
-	
-	@PostMapping("tipoIdentificacion/registrar")
-	public ResponseEntity<String> adicionarTipoDocumento(@RequestBody TipoIdentificacionDto tipoIdentificacionDto) {
-		
-		TipoIdentificacion tipoIdentifEntity= convertTipoIdentificacion.convertToEntity(tipoIdentificacionDto);
-		tipoIdentificacionRepository.save(tipoIdentifEntity);
-		return ResponseEntity.ok("Registro guardado");
-	}
+
 	
 	
 	@PostMapping("/tipoIdentificacion/adicionar")

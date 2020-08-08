@@ -6,7 +6,7 @@ import co.com.udem.registro.util.ManejoExcepcion;
 
 public class RegistroUsuarioDto {
 	
-	private Long id;
+	private Long idUsuario;
 	private String nombres;
 	private String apellidos;
     private String identificacion;
@@ -18,15 +18,13 @@ public class RegistroUsuarioDto {
 	@Autowired
 	private TipoIdentificacionDto tipoIdentificacionDto;	
 
-
-	
-	public RegistroUsuarioDto(Long id, String nombres, String apellidos, String identificacion, String direccion,
+	public RegistroUsuarioDto(Long idUsuario, String nombres, String apellidos, String identificacion, String direccion,
 			String telefono, String email, String password, TipoIdentificacionDto tipoIdentificacionDto) {
 
-		this.id =  requireNonNull(id);
-		this.nombres = nombres;
-		this.apellidos = requireNonNull(apellidos);
-		this.identificacion =requireNonNull(identificacion);
+		this.idUsuario = idUsuario;
+		this.nombres = requireNonNull(nombres);
+		this.apellidos = apellidos;
+		this.identificacion = requireNonNull(identificacion);
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.email = requireNonNull(email);
@@ -35,32 +33,16 @@ public class RegistroUsuarioDto {
 	}
 
 
-
-	public RegistroUsuarioDto(Long id, String nombres, String apellidos, String identificacion, String direccion,
-			String telefono, String email, String password, Long tipoIdentificacion) {
-		this.id = id;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-		this.identificacion = identificacion;
-		this.direccion = direccion;
-		this.telefono = telefono;
-		this.email = email;
-		this.password = password;
-		this.tipoIdentificacionDto.setIdTipoIdent(tipoIdentificacion);		
-		
-	}
-		
-	
 	public RegistroUsuarioDto() {
 	
 	}
 
 
 	public Long getId() {
-		return id;
+		return idUsuario;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	public String getNombres() {
 		return nombres;

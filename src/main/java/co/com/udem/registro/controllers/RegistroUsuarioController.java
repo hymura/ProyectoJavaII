@@ -56,7 +56,7 @@ public class RegistroUsuarioController {
 		List<RegistroUsuarioDto> listUsuarioDto = new ArrayList<>();
 
 		for (RegistroUsuario usuario : registroUsuarioRepository.findAll()) {
-			listUsuarioDto.add(new RegistroUsuarioDto(usuario.getId(), usuario.getNombres(), usuario.getApellidos(),
+			listUsuarioDto.add(new RegistroUsuarioDto(usuario.getIdUsuario(), usuario.getNombres(), usuario.getApellidos(),
 					usuario.getIdentificacion(), usuario.getDireccion(), usuario.getTelefono(), usuario.getEmail(),
 					usuario.getPassword(), new TipoIdentificacionDto(usuario.getTipoIdentificacion().getIdTipoIdent(),
 							usuario.getTipoIdentificacion().getTipo(), usuario.getTipoIdentificacion().getDescripcion())
