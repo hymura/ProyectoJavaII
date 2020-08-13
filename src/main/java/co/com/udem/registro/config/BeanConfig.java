@@ -3,6 +3,8 @@ package co.com.udem.registro.config;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import co.com.udem.registro.dto.TipoIdentificacionDto;
 import co.com.udem.registro.util.ConverRegistroUsuario;
@@ -31,6 +33,9 @@ public class BeanConfig {
 		return new TipoIdentificacionDto();
 	}
 	
-
+	@Bean
+    PasswordEncoder getEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }

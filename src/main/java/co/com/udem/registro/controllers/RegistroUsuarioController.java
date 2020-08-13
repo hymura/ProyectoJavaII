@@ -1,6 +1,7 @@
 package co.com.udem.registro.controllers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import co.com.udem.registro.dto.RegistroUsuarioDto;
 import co.com.udem.registro.dto.TipoIdentificacionDto;
 import co.com.udem.registro.entities.RegistroUsuario;
+import co.com.udem.registro.entities.factory.TipoIdentificacionFactory;
 import co.com.udem.registro.repositories.RegistroUsuarioRepository;
 import co.com.udem.registro.util.Constantes;
 import co.com.udem.registro.util.ConverRegistroUsuario;
@@ -31,14 +34,34 @@ public class RegistroUsuarioController {
 
 	@Autowired
 	private ConverRegistroUsuario converRegistroUsuario;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@PostMapping("/registroUsuario/adicionar")
 	public Map<String, String> addRegistroUsuario(@RequestBody RegistroUsuarioDto registroUsuarioDto) {
 		Map<String, String> response = new HashMap<>();
 		try {
-
-			RegistroUsuario registroUsuario = converRegistroUsuario.convertToEntity(registroUsuarioDto);
-			registroUsuarioRepository.save(registroUsuario);
+					
+			Optional<RegistroUsuario> entity=registroUsuarioRepository.findByUsername(registroUsuarioDto.getIdentificacion());
+			
+			if (entity.isPresent()){
+				response.put(Constantes.MENSAJE_ERROR, "La cedula ya existe");			
+			}else {
+				
+				registroUsuarioRepository.save(RegistroUsuario.builder()
+		                .idUsuario(registroUsuarioDto.getId())
+		                .nombres(registroUsuarioDto.getNombres())
+		                .apellidos(registroUsuarioDto.getApellidos())
+		                .identificacion(registroUsuarioDto.getIdentificacion())
+		                .direccion(registroUsuarioDto.getDireccion())
+		                .telefono(registroUsuarioDto.getTelefono())
+		                .email(registroUsuarioDto.getEmail())
+		                .password(passwordEncoder.encode(registroUsuarioDto.getPassword()))
+		                .tipoIdentificacion(TipoIdentificacionFactory.toEntity(registroUsuarioDto.getTipoIdentificacionDto()))
+		                .roles(Arrays.asList( "ROLE_USER"))
+		                 .build());
+			}
 
 			response.put(Constantes.CODIGO_HTTP, "200");
 			response.put(Constantes.MENSAJE_EXITO, "Registrado insertado exitosamente");

@@ -14,12 +14,12 @@ public interface RegistroPropiedadRepository extends CrudRepository<RegistroProp
 	@Query(
 			  value = "SELECT * FROM registro_propiedad p "+
 	                   "where 1=1 "
-	                   + "and exists(select 'x' from registro_usuario u "
-	                   + " where p.id_usuario=u.id_usuario "
-	                   + "and u.identificacion =:identificacion) "
-	                   +"and (:precio is null or p.valor >= :precio ) "
-	                   +"and (:numeroHabitaciones is null or p.numero_habitaciones = :numeroHabitaciones ) "
-	                   +"and (:area is null or p.area =:area ) ",
+	                   +"and exists(select 'x' from registro_usuario u "
+	                   +" where p.id_usuario=u.id_usuario "
+	                   +"and u.identificacion =:identificacion) "
+	                   +"and p.valor >=  COALESCE(:precio,p.valor) "
+	                   +"and  p.numero_habitaciones = COALESCE(:numeroHabitaciones,p.numero_habitaciones) "
+	                   +"and p.area=COALESCE(:area, p.area)",
 			  nativeQuery = true)
 		
     public List<RegistroPropieadad> consultarPropiedadesUsuario(@Param("identificacion") String identificacion , @Param("precio")  Double precio, @Param("numeroHabitaciones") Integer numeroHabitaciones,@Param("area") String area);
