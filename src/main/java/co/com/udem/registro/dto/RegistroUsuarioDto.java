@@ -37,13 +37,17 @@ public class RegistroUsuarioDto {
 	
 	}
 
-
-	public Long getId() {
+	
+	public Long getIdUsuario() {
 		return idUsuario;
 	}
-	public void setId(Long idUsuario) {
+
+
+	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
+
+
 	public String getNombres() {
 		return nombres;
 	}

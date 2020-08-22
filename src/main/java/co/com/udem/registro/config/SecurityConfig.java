@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers(HttpMethod.GET, "/v1/vehicles/**").permitAll()
                 //.antMatchers(HttpMethod.GET, "/users/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/registroUsuario/adicionar**").permitAll()
+                .antMatchers(HttpMethod.POST, "/tipoIdentificacion/adicionar**").permitAll()
                 //.antMatchers(HttpMethod.POST, "/clubes/adicionarClub**").permitAll()
                 .anyRequest().authenticated()
             .and()
@@ -48,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
  
 
-        //http.csrf().disable().authorizeRequests().anyRequest().authenticated().and().httpBasic();
+   
         
     }
 

@@ -35,6 +35,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "registro_usuario")
 public class RegistroUsuario implements UserDetails{
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idUsuario;

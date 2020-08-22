@@ -46,11 +46,12 @@ public class RegistroUsuarioController {
 			Optional<RegistroUsuario> entity=registroUsuarioRepository.findByUsername(registroUsuarioDto.getIdentificacion());
 			
 			if (entity.isPresent()){
+				response.put(Constantes.CODIGO_HTTP, "500");
 				response.put(Constantes.MENSAJE_ERROR, "La cedula ya existe");			
 			}else {
 				
 				registroUsuarioRepository.save(RegistroUsuario.builder()
-		                .idUsuario(registroUsuarioDto.getId())
+		                .idUsuario(registroUsuarioDto.getIdUsuario())
 		                .nombres(registroUsuarioDto.getNombres())
 		                .apellidos(registroUsuarioDto.getApellidos())
 		                .identificacion(registroUsuarioDto.getIdentificacion())

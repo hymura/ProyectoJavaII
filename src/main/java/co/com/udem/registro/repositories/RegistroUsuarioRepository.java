@@ -12,6 +12,5 @@ public interface RegistroUsuarioRepository extends CrudRepository<RegistroUsuari
 	
 	@Query("Select u from RegistroUsuario u where u.identificacion =:identificacion")
 	Optional<RegistroUsuario> findByUsername(@Param("identificacion")  String identificacion);
-	//Optional<RegistroUsuario> findByUsername(String identificacion);
-
+	
 }

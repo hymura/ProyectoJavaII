@@ -31,7 +31,7 @@ public final class RegistroUsuarioFactory {
 	 public static RegistroUsuario toEntity(RegistroUsuarioDto registroUsuarioDto ) {
 		 
 	        return RegistroUsuario.builder()
-	                .idUsuario(registroUsuarioDto.getId())
+	                .idUsuario(registroUsuarioDto.getIdUsuario())
 	                .nombres(registroUsuarioDto.getNombres())
 	                .apellidos(registroUsuarioDto.getApellidos())
 	                .identificacion(registroUsuarioDto.getIdentificacion())
