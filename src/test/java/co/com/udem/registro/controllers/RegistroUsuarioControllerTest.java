@@ -33,6 +33,7 @@ import org.junit.runner.RunWith;
 @SpringBootTest(classes = ProyectoJavaIiApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RegistroUsuarioControllerTest {
 
+
 	@Autowired
 	private TestRestTemplate restTemplate;
 	
@@ -72,20 +73,16 @@ public class RegistroUsuarioControllerTest {
 		registroUsuarioDto.setPassword("prueba1234");
 		registroUsuarioDto.setTelefono("4424485");
 	 	registroUsuarioDto.setTipoIdentificacionDto(tipoIdentificacionDto);
-		//	adicionarUsuario(registroUsuarioDto);
+			adicionarUsuario(registroUsuarioDto);
 		
 		autenticationRequestDTO.setUsername(registroUsuarioDto.getIdentificacion());
 		autenticationRequestDTO.setPassword(registroUsuarioDto.getPassword());
 
 		ResponseEntity<String> postResponse = restTemplate.postForEntity(getRootUrl() + "/auth/signin", registroUsuarioDto, String.class);
-		System.out.println("postResponse.getBody "+postResponse.getBody());
-		
+			
 		Gson g = new Gson();		
 		AutenticationResponseDTO autenticationResponseDTO = g.fromJson(postResponse.getBody(), AutenticationResponseDTO.class);
-		System.out.println("autenticationResponseDTO user: "+autenticationResponseDTO.getUsername());
-		System.out.println("autenticationResponseDTO token: "+autenticationResponseDTO.getToken());
 		token = autenticationResponseDTO.getToken();
-
 
 	}
 
@@ -105,8 +102,7 @@ public class RegistroUsuarioControllerTest {
 		
 		
 		 HttpHeaders headers = new HttpHeaders();
-		 headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		
+		 headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));		
 	     HttpEntity<Object> entity1 = new HttpEntity<>(registroUsuarioDto, headers);	    
 	     ResponseEntity<String> response  =restTemplate.exchange(getRootUrl() + "/registroUsuario/adicionar", HttpMethod.POST, entity1, String.class);	     
 	     assertEquals(200, response.getStatusCode().value());
@@ -116,59 +112,27 @@ public class RegistroUsuarioControllerTest {
 	
 	@Test
 	public void testGetRegistroUsuario() {
-		
-		
-		
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.set("Authorization", "Bearer "+token);
-		
-		System.out.println("token: "+token);
-		 HttpEntity<RegistroUsuarioDto> entity = new HttpEntity<>(headers);
-		 
+		headers.set("Authorization", "Bearer "+token);		 
 		ResponseEntity<String> response =restTemplate.postForEntity(getRootUrl() + "/registroUsuario/adicionar", registroUsuarioDto, String.class);
-		System.out.println("response usuario: "+response.getBody());
 		assertEquals(200, response.getStatusCode().value());
-
 	}
 	
-	
-	
-/*	
-	@Test
-	public void adicionarUsuarioTest() {
-		
-		
-		ResponseEntity<String> postResponse = restTemplate.postForEntity(getRootUrl() + "/auth/signin", autenticationRequestDTO, String.class);
-		token=postResponse.getBody();
-		adicionarUsuario(registroUsuarioDto);
-		 System.out.println("Nuevo Token "+token);
-		 
-		 Gson g = new Gson();
-		AutenticationResponseDTO autenticationResponseDTO = g.fromJson(postResponse.getBody(), AutenticationResponseDTO.class);
-		token = autenticationResponseDTO.getToken();
-		
-	        HttpHeaders headers = new HttpHeaders();
-	        headers.setContentType(MediaType.APPLICATION_JSON);
-	        System.out.println("El token es: "+this.token);
-	        headers.set("Authorization", "Bearer "+this.token);
-	        HttpEntity<RegistroUsuarioDto> entity = new HttpEntity<RegistroUsuarioDto>(registroUsuarioDto, headers);
-	        ResponseEntity<String> postResponse1 = restTemplate.exchange(getRootUrl() + "/registroUsuario/adicionar", HttpMethod.POST, entity, String.class);      
-	        //ResponseEntity<ClubFutbolDTO> postResponse = restTemplate.postForEntity(getRootUrl() + "/clubes/adicionarClub", clubFutbolDTO, ClubFutbolDTO.class);
-	        assertEquals(200, postResponse1.getStatusCode().value());
-	        //assertNotNull(postResponse);
-	        //assertNotNull(postResponse.getBody());
-
-	}
-*/
 
 
 	@Test
 	public void testUpdateUsuario() {
 		
+
 		int id = 1;
-		RegistroUsuario registroUsuario = restTemplate.getForObject(getRootUrl() + "/registroUsuario/" + id,
-				RegistroUsuario.class);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.set("Authorization", "Bearer "+token);
+		
+		 RegistroUsuario registroUsuario = restTemplate.getForObject(getRootUrl() + "/registroUsuario/" + id,RegistroUsuario.class);
+		 registroUsuario.setIdUsuario(registroUsuarioDto.getIdUsuario());
 		registroUsuario.setNombres(registroUsuarioDto.getNombres());
 		registroUsuario.setApellidos(registroUsuarioDto.getApellidos());
 		registroUsuario.setDireccion(registroUsuarioDto.getDireccion());
@@ -177,17 +141,24 @@ public class RegistroUsuarioControllerTest {
 		registroUsuario.setPassword(registroUsuarioDto.getPassword());
 		registroUsuario.setTelefono(registroUsuarioDto.getTelefono());
 		registroUsuario.setTipoIdentificacion(convertTipoIdentificacion.convertToEntity(tipoIdentificacionDto));
-
-		restTemplate.put(getRootUrl() + "/usuarios/" + id, registroUsuario);
-		RegistroUsuario updatedUsuario = restTemplate.getForObject(getRootUrl() + "/registroUsuario/" + id,
+		
+		HttpHeaders headers2 = new HttpHeaders();
+		headers2.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers2.set("Authorization", "Bearer "+token);	
+		
+		
+	RegistroUsuario updatedUsuario = restTemplate.getForObject(getRootUrl() + "/registroUsuario/" + id,
 				RegistroUsuario.class);
-		assertNotNull(updatedUsuario);
+				
+		
+	 assertNotNull(updatedUsuario);
 	}
 	
 	private void adicionarUsuario(RegistroUsuarioDto registroUsuarioDto2) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         ResponseEntity<String> postResponse = restTemplate.postForEntity(getRootUrl() + "/registroUsuario/adicionar", registroUsuarioDto2, String.class);
+        
         postResponse.getBody();    
         System.out.println("Crear usuario: "+postResponse.getBody());
     }

@@ -53,7 +53,22 @@ public class RegistroPropiedadController {
 		}
 	}
 
-	@GetMapping("/consultarPropiedades")
+	@GetMapping("/consultarPropiedadUsuario/{identificacion}")
+	public List<RegistroPropieadadDto> buscarPropiedad(@PathVariable String identificacion,
+			@RequestParam(value = "precio", required = false, defaultValue = "") Double precio,
+			@RequestParam(value = "numeroHabitaciones", required = false, defaultValue = "") Integer numeroHabitaciones,
+			@RequestParam(value = "area", required = false, defaultValue = "") String area) {
+
+		List<RegistroPropieadad> listRegistroPropieadad;
+
+		listRegistroPropieadad = registroPropiedadRepository.consultarPropiedadesUsuario(identificacion, precio,
+				numeroHabitaciones, area);
+
+		return listRegistroPropieadad.stream().map(RegistroPropiedadFactory::toModel).collect(Collectors.toList());
+
+	}
+	
+	@GetMapping("/ListarPropiedades")
 	public List<RegistroPropieadadDto> listfindAll() {
 		List<RegistroPropieadad> listRegistroPropieadadDto;
 
@@ -63,7 +78,7 @@ public class RegistroPropiedadController {
 
 	}
 
-	@GetMapping("/Propiedades")
+	@GetMapping("/ConsultarPropiedades")
 	public List<RegistroPropieadadDto> listPropiedades() {
 
 		List<RegistroPropieadadDto> listRegistroPropieadadDto = new ArrayList<>();
@@ -86,20 +101,6 @@ public class RegistroPropiedadController {
 		return listRegistroPropieadad.stream().map(RegistroPropiedadFactory::toModel).collect(Collectors.toList());
 	}
 
-	@GetMapping("/consultarPropiedadUsuario/{identificacion}")
-	public List<RegistroPropieadadDto> buscarPropiedad(@PathVariable String identificacion,
-			@RequestParam(value = "precio", required = false, defaultValue = "") Double precio,
-			@RequestParam(value = "numeroHabitaciones", required = false, defaultValue = "") Integer numeroHabitaciones,
-			@RequestParam(value = "area", required = false, defaultValue = "") String area) {
-
-		List<RegistroPropieadad> listRegistroPropieadad;
-
-		listRegistroPropieadad = registroPropiedadRepository.consultarPropiedadesUsuario(identificacion, precio,
-				numeroHabitaciones, area);
-
-		return listRegistroPropieadad.stream().map(RegistroPropiedadFactory::toModel).collect(Collectors.toList());
-
-	}
 
 	@PutMapping("/actualizar/{id}")
 	public ResponseEntity<Object> updateCliente(@RequestBody RegistroPropieadadDto usuarioPropiedadDto,
